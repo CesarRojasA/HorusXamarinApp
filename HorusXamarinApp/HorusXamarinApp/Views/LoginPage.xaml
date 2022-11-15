@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:viewmodels="clr-namespace:HorusXamarinApp.ViewModels" 
+             x:DataType="viewmodels:LoginPageViewModel"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="HorusXamarinApp.Views.LoginPage"
+             xmlns:res="clr-namespace:HorusXamarinApp.Resources">
+    <ContentPage.Content>
+        <StackLayout IsEnabled="{Binding IsEnableScreen}" 
+                     Opacity="{Binding OpacityScreen}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.15*"></RowDefinition>
+                    <RowDefinition Height="0.65*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame 
+                    Grid.Row="0"
+                    Grid.RowSpan="2" 
+                    Style="{StaticResource FrameImageLogoLoginStyle}">
+                    <Image  
+                       Aspect="AspectFill"
+                        Source="background"/>
+                </Frame>
+                
+                <StackLayout 
+                    Grid.Row="1">
+                    <Label 
+                        Text="{x:Static res:LoginResource.LblBienvenido}"
+                        Style="{StaticResource LabelBienvenidoLoginStyle}"/>
+                    <Image  
+                        Margin="30,0" 
+                        HorizontalOptions="Start"
+                        Source="logo_w"/>
+                </StackLayout>
+                <ScrollView 
+                    Grid.Row="2">
+                    <StackLayout 
+                        Spacing="5"
+                        Margin="30, 40"
+                        VerticalOptions="Center">
+                        <Label
+                            Text="{x:Static res:LoginResource.lblEmail}"
+                            Style="{StaticResource LabelLoginStyle}"/>
+                        <Frame 
+                            Style="{StaticResource FrameEntryLoginStyle}">
+                            <Entry    
+                                Placeholder="hello@horus.com"
+                                Keyboard="Email"
+                                Text="{Binding LoginModel.Email}"
+                                Style="{StaticResource EntryLoginStyle}"/>
+                        </Frame>
+                        <Label
+                            Text="{x:Static res:LoginResource.lblContraseña}"
+                            Style="{StaticResource LabelLoginStyle}"/>
+
+                        <Frame 
+                            Grid.Column="0"
+                            Style="{StaticResource FrameEntryLoginStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.85*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Entry
+                                    HorizontalOptions="FillAndExpand"
+                                    Placeholder="******"
+                                    CharacterSpacing="3"
+                                    IsPassword="{Binding IsPassword}"
+                                    Text="{Binding LoginModel.Password}"
+                                    Style="{StaticResource EntryLoginStyle}"/>
+                                <ImageButton  
+                                    Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    Source="eye_b"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding EyeCommand}"
+                                    IsVisible="{Binding EyeIsVisible}"/>
+                                <ImageButton
+                                    Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    Source="eye_none_b"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding EyeCommand}"
+                                    IsVisible="{Binding EyeNoneIsVisible}"/>
+                            </Grid>
+                        </Frame>
+
+                        <Label
+                            Text="{x:Static res:LoginResource.lblOlvidasteContraseña}"
+                            Style="{StaticResource LabelLoginStyle}"/>
+
+                        <ActivityIndicator 
+                            IsVisible="{Binding IsVisibleActivity}"
+                            IsRunning="{Binding IsRunningActivity}" 
+                            Color="#828282"></ActivityIndicator>
+                        
+                        <Button 
+                            Text="{x:Static res:LoginResource.btnLogin}"
+                            Command="{Binding LoginCommand}"
+                            Style="{StaticResource ButtonLoginStyle}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="50" HorizontalOptions="Center">
+                            <Frame 
+                                Style="{StaticResource FrameImageLoginStyle}">
+                                <Image  
+                                    Source="instagram_g" 
+                                    Aspect="AspectFill"/>
+                            </Frame>
+                            <Frame 
+                                Style="{StaticResource FrameImageLoginStyle}">
+                                <Image  
+                                    Source="facebook_g" 
+                                    Aspect="AspectFill"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <Button 
+                            Text="{x:Static res:LoginResource.btnRegistrar}"
+                            Style="{StaticResource ButtonRegisterLoginStyle}"/>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

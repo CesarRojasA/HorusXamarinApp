@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:prism="http://prismlibrary.com"
+                prism:ViewModelLocator.AutowireViewModel="True"
+                x:Class="HorusXamarinApp.Views.Gamification.GamificationPage"
+                xmlns:res="clr-namespace:HorusXamarinApp.Resources">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"></RowDefinition>
+                <RowDefinition Height="0.85*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" 
+                   Margin="30" 
+                   FontAttributes="Bold" 
+                   FontSize="24" 
+                   TextColor="#1A1A1A" 
+                   Text="{x:Static res:GamificationResource.lblRetos}"></Label>
+
+            <StackLayout 
+                Grid.Row="0" 
+                Style="{StaticResource StackLayGamiStyle}">
+                <Label 
+                    TextColor="#F49390"
+                    Text="{Binding ContadorRetosIncompletos}"
+                    Style="{StaticResource LabelGamiStyle}"></Label>
+                <Label 
+                    Text="/"
+                    Style="{StaticResource LabelGamiStyle}"></Label>
+                <Label 
+                    Text="{Binding ContadorRetos}"
+                    Style="{StaticResource LabelGamiStyle}"></Label>
+            </StackLayout>
+
+            <ScrollView Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Frame 
+                        Grid.Row="0"
+                        Style="{StaticResource FrameFirstGamiStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.3*"></RowDefinition>
+                                <RowDefinition Height="0.4*"></RowDefinition>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label 
+                                Grid.Row="0" 
+                                Style="{StaticResource LabelFirstGamiStyle}"
+                                Text="{Binding RetoModel.Title}"></Label>
+                            <ImageButton 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Source="arrow_right_g"
+                                Style="{StaticResource ImageButtonGamiStyle}"></ImageButton>
+                            <Label 
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                MaxLines="2"
+                                Text="{Binding RetoModel.Description}"
+                                Style="{StaticResource LabelSubFirstGamiStyle}"></Label>
+                            <StackLayout 
+                                Grid.Row="2"
+                                Spacing="0.5"
+                                Orientation="Horizontal">
+                                <Label 
+                                    Text="{Binding RetoModel.CurrentPoints}"
+                                    Style="{StaticResource LabelSubFirstGamiStyle}"></Label>
+                                <Label 
+                                     Text="/"
+                                    Style="{StaticResource LabelSubFirstGamiStyle}"></Label>
+                                <Label 
+                                    Text="{Binding RetoModel.TotalPoints}"
+                                    Style="{StaticResource LabelSubFirstGamiStyle}"></Label>
+                            </StackLayout>
+                            <Label 
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                HorizontalTextAlignment="End"
+                                FontAttributes="Bold"
+                                Text="{Binding RetoModel.PorcentajeDeAvance}"
+                                Style="{StaticResource LabelSubFirstGamiStyle}"></Label>
+
+                            <ProgressBar
+                                Grid.Row="3"
+                                Grid.ColumnSpan="2"
+                                ProgressColor="#FFFFFF"
+                                Progress="{Binding RetoModel.ValorDelProgreso}"></ProgressBar>
+                        </Grid>
+                    </Frame>
+                    <StackLayout
+                        Grid.Row="1">
+                        <CollectionView 
+                            ItemsSource="{Binding AllRetos}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout                        
+                                    Orientation="Vertical"
+                                    Span="1"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame 
+                                            Style="{StaticResource FrameGamiStyle}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.3*"></RowDefinition>
+                                                    <RowDefinition Height="0.4*"></RowDefinition>
+                                                    <RowDefinition Height="0.2*"></RowDefinition>
+                                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label 
+                                                    Grid.Row="0" 
+                                                    Text="{Binding Title}"
+                                                    Style="{StaticResource LabelGamiStyle}"></Label>
+                                                <ImageButton 
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Source="arrow_right_g"
+                                                    Style="{StaticResource ImageButtonGamiStyle}"></ImageButton>
+                                                <Label 
+                                                    Grid.Row="1"
+                                                    Grid.ColumnSpan="2"
+                                                    MaxLines="2"
+                                                    Text="{Binding Description}"
+                                                    Style="{StaticResource LabelSubGamiStyle}"></Label>
+                                                <StackLayout 
+                                                    Grid.Row="2"
+                                                    Spacing="0.5"
+                                                    Orientation="Horizontal">
+                                                    <Label 
+                                                        Text="{Binding CurrentPoints}"
+                                                        Style="{StaticResource LabelSubGamiStyle}"></Label>
+                                                    <Label 
+                                                        Text="/"
+                                                        Style="{StaticResource LabelSubGamiStyle}"></Label>
+                                                    <Label 
+                                                        Style="{StaticResource LabelSubGamiStyle}"
+                                                        Text="{Binding TotalPoints}"></Label>
+                                                </StackLayout>
+                                                <Label 
+                                                    Grid.Row="2"
+                                                    Grid.Column="1"
+                                                    HorizontalTextAlignment="End"
+                                                    FontAttributes="Bold"
+                                                    Style="{StaticResource LabelPorcentGamiStyle}"
+                                                    Text="{Binding PorcentajeDeAvance}"></Label>
+
+                                                <ProgressBar
+                                                    Grid.Row="3"
+                                                    Grid.ColumnSpan="2"
+                                                    ProgressColor="#F49390"
+                                                    Progress="{Binding ValorDelProgreso}"></ProgressBar>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
